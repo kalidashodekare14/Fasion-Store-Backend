@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import { SellerService } from "./service"
 import sendResponse from "../../utils/sendResponse";
 
-// Add a product 
+// Add product 
 export const productAdd = async (req: Request, res: Response) => {
     const result = await SellerService.addProduct(req.body);
     sendResponse(res, {
@@ -12,11 +12,21 @@ export const productAdd = async (req: Request, res: Response) => {
     })
 }
 
+// Edit product
 export const productEdit = async (req: Request, res: Response) => {
     const result = await SellerService.editProduct(req.body);
     sendResponse(res, {
         success: true,
         message: "Product Edit Successfuly🎉",
         data: result
+    })
+}
+
+// Delete product
+export const productDelete = async (req: Request, res: Response) => {
+    const result = await SellerService.deleteProduct(req.body);
+    sendResponse(res, {
+        success: true,
+        message: "Product Delete Successfuly🎉",
     })
 }

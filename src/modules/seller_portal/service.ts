@@ -31,11 +31,18 @@ export const SellerService = {
                 new: true
             }
         );
-        
+
         if (!updateProduct) {
             throw new Error("Product not found");
         }
 
         return updateProduct;
+    },
+    deleteProduct: async (payload: any) => {
+        const { id } = payload;
+        const deleteProduct = await Product.findByIdAndDelete(id);
+        if (!deleteProduct) {
+            throw new Error("Product not found");
+        }
     }
 }
