@@ -4,13 +4,14 @@ import { Product } from "../product/product.model";
 
 export const SellerService = {
     addProduct: async (payload: any) => {
-        const { title, description, category, price, image } = payload;
+        const { title, description, category, price, image, seller_email } = payload;
         const result = await Product.create({
             title: title,
             description: description,
             category: category,
             price: price,
-            image: image
+            image: image,
+            seller_email: seller_email
         })
         return result
     },
@@ -44,5 +45,10 @@ export const SellerService = {
         if (!deleteProduct) {
             throw new Error("Product not found");
         }
+    },
+    totalProducts: async (payload: any) => {
+        const { seller_email } = payload;
+        const totalOrder = await Product.find({ seller_email: seller_email });
+        return totalOrder
     }
 }

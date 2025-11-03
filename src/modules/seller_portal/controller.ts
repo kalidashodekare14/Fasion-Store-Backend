@@ -30,3 +30,13 @@ export const productDelete = async (req: Request, res: Response) => {
         message: "Product Delete Successfuly🎉",
     })
 }
+
+// Total Orders
+export const allProducts = async (req: Request, res: Response) => {
+    const result = await SellerService.totalProducts(req.body);
+    sendResponse(res, {
+        success: true,
+        message: "Total Product Successfuly🎉",
+        data: result
+    })
+}

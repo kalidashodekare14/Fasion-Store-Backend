@@ -6,7 +6,8 @@ export interface IProduct {
     description: string,
     category: string,
     price: number,
-    image: string[]
+    image: string[],
+    seller_email: string
 }
 
 
@@ -32,6 +33,10 @@ const productSchema = new Schema<IProduct>(
             type: [String],
             required: true,
             default: [],
+        },
+        seller_email: {
+            type: String,
+            required: true,
         }
     },
     {
