@@ -7,7 +7,8 @@ export interface IProduct {
     category: string,
     price: number,
     image: string[],
-    seller_email: string
+    seller_email: string,
+    status: "Pending" | "Approved" | "Rejected" | "Processing" | "Out for Delivary" | "Completed";
 }
 
 
@@ -37,6 +38,18 @@ const productSchema = new Schema<IProduct>(
         seller_email: {
             type: String,
             required: true,
+        },
+        status: {
+            type: String,
+            enum: [
+                "Pending",
+                "Approved",
+                "Rejected",
+                "Processing",
+                "Out for Delivary",
+                "Completed"
+            ],
+            default: "Pending"
         }
     },
     {

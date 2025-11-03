@@ -16,3 +16,11 @@ export const productGetValidation = z.object({
         seller_email: z.string().email("Invalid seller email")
     })
 })
+
+export const productStatusValidation = z.object({
+    body: z.object({
+        seller_email: z.string().email("Invalid seller email"),
+        id: z.string().min(1, "ID is required"),
+        status: z.string().min(1, "Status is required")
+    })
+})

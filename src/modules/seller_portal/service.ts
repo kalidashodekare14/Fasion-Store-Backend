@@ -50,5 +50,22 @@ export const SellerService = {
         const { seller_email } = payload;
         const totalOrder = await Product.find({ seller_email: seller_email });
         return totalOrder
+    },
+    productStatus: async (payload: any) => {
+        const { seller_email, id, status } = payload;
+        const product = await Product.findOneAndUpdate(
+            {
+                _id: id,
+                seller_email: seller_email,
+            },
+            {
+                $set: { status: status },
+            },
+            { new: true }
+        );
+        if (!product) {
+            throw new Error("Product not found or not owned by this seller");
+        }
+        return product
     }
 }
