@@ -19,3 +19,21 @@ export const getProductDetails = async (req: Request, res: Response) => {
         data: products
     })
 }
+
+export const productOrder = async (req: Request, res: Response) => {
+    const order = await BuyerService.productOrder(req.body);
+    sendResponse(res, {
+        success: true,
+        message: "Product Order successfully",
+        data: order
+    })
+}
+
+export const getOrderTrack = async (req: Request, res: Response) => {
+    const order = await BuyerService.orderTrack(req.params.email);
+    sendResponse(res, {
+        success: true,
+        message: "Order tracking successfully",
+        data: order
+    })
+}

@@ -13,11 +13,10 @@ export interface IOrder {
     "Approved" |
     "Rejected" |
     "Processing" |
-    "Out for Delivary" |
+    "Out for Delivery" |
     "Completed";
     address: string;
     phone: number;
-    createdAt?: Date;
 }
 
 

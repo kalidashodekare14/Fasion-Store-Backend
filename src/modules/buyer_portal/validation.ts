@@ -8,3 +8,25 @@ export const allProductValidation = z.object({
         maxPrice: z.string().optional(),
     })
 })
+
+export const orderValidation = z.object({
+    body: z.object({
+        buyer_email: z.string().email(),
+        seller_email: z.string().email(),
+        product_id: z.string(),
+        quantity: z.number().min(1).default(1),
+        total_price: z.number().positive(),
+        payment_method: z.enum(["Cash on Delivery", "Bkash"]),
+        payment_status: z.enum(["Pending", "Paid"]).default("Pending"),
+        status: z.enum([
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Processing",
+            "Out for Delivery",
+            "Completed",
+        ]).default("Pending"),
+        address: z.string(),
+        phone: z.number(),
+    }),
+});

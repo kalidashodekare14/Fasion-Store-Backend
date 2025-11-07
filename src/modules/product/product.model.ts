@@ -8,7 +8,7 @@ export interface IProduct {
     price: number,
     image: string[],
     seller_email: string,
-    status: "Pending" | "Approved" | "Rejected" | "Processing" | "Out for Delivary" | "Completed";
+    status: "Pending" | "Approved" | "Rejected" | "Processing" | "Out for Delivery" | "Completed";
 }
 
 

@@ -1,3 +1,4 @@
+import { Order } from "../order/order.model";
 import { Product } from "../product/product.model";
 
 
@@ -27,5 +28,15 @@ export const BuyerService = {
             throw new Error("Product not found");
         }
         return product
+    },
+    productOrder: async (payload: any) => {
+        const order = await Order.create(payload);
+        return order;
+
+    },
+    orderTrack: async (email: string | undefined) => {
+        if (!email) return [];
+        const track = await Order.find({ buyer_email: email });
+        return track;
     }
 }
