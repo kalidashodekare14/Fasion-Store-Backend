@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { AuthRoutes } from './modules/auth/routes';
-import { sellerPortalRoutes } from './modules/seller_portal/routes'
+import { sellerPortalRoutes } from './modules/seller_portal/routes';
+import { BuyerPortalRoutes } from './modules/buyer_portal/routes';
 
 const app = express();
 
@@ -25,9 +26,10 @@ app.get('/', (req, res) => {
 })
 
 
-// API routes
+// API routes version 1
 app.use("/api/v1/auth", AuthRoutes);
-app.use("/app/v1/product", sellerPortalRoutes);
+app.use("/api/v1/seller_product", sellerPortalRoutes);
+app.use("/api/v1/buyer_product", BuyerPortalRoutes);
 
 
 export default app;
