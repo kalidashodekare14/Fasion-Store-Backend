@@ -6,8 +6,8 @@ export const BuyerService = {
     totalProdut: async (query: any) => {
         const filter: any = {};
 
-        if (query.name) {
-            filter.title = { $regex: query.name, $options: "i" }
+        if (query.title) {
+            filter.title = { $regex: query.title, $options: "i" }
         }
 
         if (query.category) {
@@ -30,6 +30,7 @@ export const BuyerService = {
         return product
     },
     productOrder: async (payload: any) => {
+        console.log('checking data', payload);
         const order = await Order.create(payload);
         return order;
 

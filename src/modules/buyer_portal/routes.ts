@@ -4,6 +4,7 @@ import validateRequest from '../../middlewares/validateRequest';
 import { allProductValidation, orderValidation } from './validation';
 const router = express.Router();
 
+// 
 
 
 router.get('/products', validateRequest(allProductValidation), getAllProdcut);

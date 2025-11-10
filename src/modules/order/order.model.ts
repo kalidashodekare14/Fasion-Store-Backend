@@ -1,72 +1,66 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 
-export interface IOrder {
+export interface IOrder extends Document {
     buyer_email: string;
     seller_email: string;
-    product_id: string;
-    quantity: number;
+    total_quantity: number;
+    items: {
+        product_id: string;
+        product_title: string;
+        product_category: string;
+        price: number;
+        quantity: number;
+    }[];
     total_price: number;
-    payment_method: string;
+    payment_method: "Cash on Delivery" | "Bkash";
     payment_status: "Pending" | "Paid";
-    status: "Pending" |
-    "Approved" |
-    "Rejected" |
-    "Processing" |
-    "Out for Delivery" |
-    "Completed";
+    status:
+    | "Pending"
+    | "Approved"
+    | "Rejected"
+    | "Processing"
+    | "Out for Delivery"
+    | "Completed";
     address: string;
-    phone: number;
+    phone: string;
 }
 
+const itemSchema = new Schema(
+    {
+        product_id: { type: String, required: true },
+        product_title: { type: String, required: true },
+        product_category: { type: String, required: true },
+        price: { type: Number, required: true },
+        quantity: { type: Number, required: true },
+    },
+    { _id: false }
+);
 
 const orderSchema = new Schema<IOrder>(
     {
-        buyer_email: {
-            type: String,
-            required: true
-        },
-        seller_email: {
-            type: String,
-            required: true
-        },
-        product_id: {
-            type: String,
-            required: true
-        },
-        quantity: {
-            type: Number,
-            default: 1
-        },
-        total_price: {
-            type: Number,
-            required: true
-        },
-        payment_method: {
-            type: String,
-            required: true
-        },
-        payment_status: {
-            type: String,
-            default: "Pending"
-        },
+        buyer_email: { type: String, required: true },
+        seller_email: { type: String, required: true },
+        total_quantity: { type: Number, required: true },
+        items: [itemSchema],
+        total_price: { type: Number, required: true },
+        payment_method: { type: String, enum: ["Cash on Delivery", "Bkash"], required: true },
+        payment_status: { type: String, enum: ["Pending", "Paid"], default: "Pending" },
         status: {
             type: String,
-            default: "Pending"
+            enum: [
+                "Pending",
+                "Approved",
+                "Rejected",
+                "Processing",
+                "Out for Delivery",
+                "Completed",
+            ],
+            default: "Pending",
         },
-        address: {
-            type: String,
-            required: true
-        },
-        phone: {
-            type: Number,
-            required: true
-        },
+        address: { type: String, required: true },
+        phone: { type: String, required: true },
     },
-    {
-        timestamps: true
-    }
-)
-
-
+    { timestamps: true }
+);
 export const Order = model<IOrder>("Orders", orderSchema);

@@ -13,8 +13,16 @@ export const orderValidation = z.object({
     body: z.object({
         buyer_email: z.string().email(),
         seller_email: z.string().email(),
-        product_id: z.string(),
-        quantity: z.number().min(1).default(1),
+        total_quantity: z.number().min(1),
+        items: z.array(
+            z.object({
+                product_id: z.string(),
+                product_title: z.string(),
+                product_category: z.string(),
+                price: z.number().positive(),
+                quantity: z.number().min(1),
+            })
+        ),
         total_price: z.number().positive(),
         payment_method: z.enum(["Cash on Delivery", "Bkash"]),
         payment_status: z.enum(["Pending", "Paid"]).default("Pending"),
@@ -27,6 +35,6 @@ export const orderValidation = z.object({
             "Completed",
         ]).default("Pending"),
         address: z.string(),
-        phone: z.number(),
+        phone: z.string(),
     }),
 });

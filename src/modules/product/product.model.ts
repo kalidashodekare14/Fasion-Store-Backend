@@ -2,6 +2,7 @@ import { model, Schema } from "mongoose"
 
 
 export interface IProduct {
+    _id: string,
     title: string,
     description: string,
     category: string,
@@ -14,6 +15,9 @@ export interface IProduct {
 
 const productSchema = new Schema<IProduct>(
     {
+        _id: {
+            type: String
+        },
         title: {
             type: String,
             required: true
