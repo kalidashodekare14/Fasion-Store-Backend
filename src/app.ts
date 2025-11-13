@@ -10,7 +10,7 @@ const app = express();
 
 
 app.use(cors({
-    origin: true,
+    origin: "http://localhost:3000",
     credentials: true
 }));
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
     res.send(`
         <div>
-             <h1>Fasion Store Backend Running 🚀</h1>
+            <h1>Fasion Store Backend Running 🚀</h1>
             <p>🎉 Welcome to the Fasion Store</p>
         </div>
         `)

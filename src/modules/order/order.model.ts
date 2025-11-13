@@ -2,8 +2,8 @@ import { Schema, model, Document } from 'mongoose';
 
 
 export interface IOrder extends Document {
+    buyer_name: string;
     buyer_email: string;
-    seller_email: string;
     total_quantity: number;
     items: {
         product_id: string;
@@ -33,14 +33,15 @@ const itemSchema = new Schema(
         product_category: { type: String, required: true },
         price: { type: Number, required: true },
         quantity: { type: Number, required: true },
+        seller_email: { type: String, required: true },
     },
     { _id: false }
 );
 
 const orderSchema = new Schema<IOrder>(
     {
+        buyer_name: { type: String, required: true },
         buyer_email: { type: String, required: true },
-        seller_email: { type: String, required: true },
         total_quantity: { type: Number, required: true },
         items: [itemSchema],
         total_price: { type: Number, required: true },

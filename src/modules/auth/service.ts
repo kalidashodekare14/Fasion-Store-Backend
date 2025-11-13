@@ -12,7 +12,8 @@ export const AuthServices = {
     },
     loginUser: async (payload: any) => {
         const { email, password } = payload;
-        const user = await User.findOne({ email }).select("+password");;
+        console.log('checking email password', email, password);
+        const user = await User.findOne({ email }).select("+password");
         if (!user) throw new Error("User not found");
 
         const isMatch = await bcrypt.compare(password, user.password);
@@ -21,6 +22,8 @@ export const AuthServices = {
         const token = jwt.sign({ id: user._id, email: user.email }, config.jwt_secret, {
             expiresIn: '7d'
         });
+
+        console.log('checking user and token', user, token);
 
         return { token, user };
     }

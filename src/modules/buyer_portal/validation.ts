@@ -11,8 +11,8 @@ export const allProductValidation = z.object({
 
 export const orderValidation = z.object({
     body: z.object({
+        buyer_name: z.string(),
         buyer_email: z.string().email(),
-        seller_email: z.string().email(),
         total_quantity: z.number().min(1),
         items: z.array(
             z.object({
@@ -21,6 +21,7 @@ export const orderValidation = z.object({
                 product_category: z.string(),
                 price: z.number().positive(),
                 quantity: z.number().min(1),
+                seller_email: z.string().email(),
             })
         ),
         total_price: z.number().positive(),
